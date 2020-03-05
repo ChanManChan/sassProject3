@@ -43,6 +43,7 @@ body {
 }
 .container {
   display: grid;
+
   grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
   grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(
       6rem,
@@ -51,6 +52,7 @@ body {
       6rem,
       1fr
     ) [full-end]; /*<-- (min-content, 14rem) (*) usually we use something like between 1100 and 1200px would be reasonable , 1140/8 = 142.5px ~= 140px ~= 14rem each column width which is fixed*/
+
   @media only screen and (max-width: $bp-large) {
     grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
     grid-template-columns: [full-start] minmax(
