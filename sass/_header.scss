@@ -1,0 +1,55 @@
+.header {
+  background-color: $color-grey-dark-1;
+  grid-column: full-start / col-end 6;
+  background-image: linear-gradient(
+      rgba($color-secondary, 0.93),
+      rgba($color-secondary, 0.93)
+    ),
+    url(../img/hero.jpeg);
+  background-size: cover;
+  background-position: center;
+  padding: 8rem;
+  padding-top: 4rem;
+
+  display: grid;
+  grid-template-rows: 1fr min-content 6rem 1fr; /*<-- with these 2 '1fr', we'll have dynamic spacing in the vertical direction. (so basically the space changes only in the rows where we defined '1fr' as the size of the row track)*/
+  grid-template-columns: max-content;
+  grid-row-gap: 1.5rem;
+  justify-content: center;
+  &__logo {
+    height: 3rem;
+    justify-self: center;
+  }
+  &__btn {
+    align-self: start;
+    justify-self: start;
+  }
+  &__seenon-text {
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-column-gap: 1.5rem;
+    align-items: center;
+    font-size: 1.6rem;
+    color: $color-grey-light-2;
+
+    &::before,
+    &::after {
+      /*these two here together with the text will be the 3 grid items*/
+      content: '';
+      height: 1px;
+      display: block;
+      background-color: currentColor;
+    }
+  }
+  &__seenon-logos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    grid-gap: 3rem;
+
+    img {
+      height: 2.5rem;
+      filter: brightness(70%);
+    }
+  }
+}
