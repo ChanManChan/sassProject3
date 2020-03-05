@@ -14,6 +14,12 @@ $color-grey-dark-2: #6d5d4b;
 $font-primary: 'Nunito', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
 
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em;  // 1200px/16px = 75em
+$bp-large: 62.5em;  // 1000px/16px = 62.5em
+$bp-medium: 50em;   // 800px/16px = 50em
+$bp-small: 37.5em;  // 600px/16px = 37.5em
+
 *,
 *::before,
 *::after {
@@ -24,7 +30,10 @@ $font-display: 'Josefin Sans', sans-serif;
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%; // 1rem = 10px
+  font-size: 62.5%; // 10px/16px = 67.5% --> 1rem = 10px
+  @media only screen and (max-width: $bp-largest) {
+    font-size: 50% // 8px/16px = 50% --> 1rem = 8px
+  }
 }
 body {
   font-family: $font-primary;
@@ -42,4 +51,17 @@ body {
       6rem,
       1fr
     ) [full-end]; /*<-- (min-content, 14rem) (*) usually we use something like between 1100 and 1200px would be reasonable , 1140/8 = 142.5px ~= 140px ~= 14rem each column width which is fixed*/
+  @media only screen and (max-width: $bp-large) {
+    grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
+    grid-template-columns: [full-start] minmax(
+        6rem,
+        1fr
+      ) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(
+        6rem,
+        1fr
+      ) [full-end];
+  }
+  @media only screen and (max-width: $bp-medium) {
+    grid-template-rows: 6rem calc(100vh - 6rem); /*<--only 2 rows that we really want to style, interms of size, by ourselves are the 1st two, the sidebar and the header and the rest will now will be sized based on the content*/
+  }
 }

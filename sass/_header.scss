@@ -12,10 +12,20 @@
   padding-top: 4rem;
 
   display: grid;
-  grid-template-rows: 1fr min-content 6rem 1fr; /*<-- with these 2 '1fr', we'll have dynamic spacing in the vertical direction. (so basically the space changes only in the rows where we defined '1fr' as the size of the row track)*/
-  grid-template-columns: max-content;
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr; /*<-- with these 2 '1fr', we'll have dynamic spacing in the vertical direction. (so basically the space changes only in the rows where we defined '1fr' as the size of the row track)*/
+  grid-template-columns: minmax(min-content, max-content); /*<--'max-content:' says that it should be as wide as possible in order to fit all the content, regardless of the width of the viewport or the container itself*/
+  /*
+    'min-content:' the column should never be more narrow than the content itself
+  */
   grid-row-gap: 1.5rem;
   justify-content: center;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1;
+  }
+  @media only screen and (max-width: $bp-small) {
+    padding: 5rem;
+  }
   &__logo {
     height: 3rem;
     justify-self: center;
@@ -44,11 +54,13 @@
   &__seenon-logos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 3rem;
     justify-items: center;
-    grid-gap: 3rem;
+    align-items: center;
 
     img {
-      height: 2.5rem;
+      max-height: 2.5rem; //<-- height can be 2.5rem or less
+      max-width: 100%;
       filter: brightness(70%);
     }
   }
